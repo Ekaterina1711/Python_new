@@ -9,13 +9,19 @@ for i in range(N):
     yield_of_bush = int(input(f"Введите урожайность для куста {i + 1}: "))
     harvest.append(yield_of_bush)
 
-# Пользователь выбирает номер куста, перед которым будет вставлен собирающий модуль
-selected_bush = int(input("Введите номер куста, перед которым будет вставлен собирающий модуль: ")) - 1
+# Рассчитываем максимальную урожайность и индексы тройки кустов с максимальной урожайностью
+max_harvest = 0
+max_indices = (0, 1, 2)
 
-# Рассчитываем максимальную урожайность за один заход собирающего модуля
-max_harvest = harvest[selected_bush] + harvest[(selected_bush + 1) % N] + harvest[(selected_bush - 1) % N]
+for i in range(N):
+    current_harvest = harvest[i] + harvest[(i + 1) % N] + harvest[(i + 2) % N]
+    if current_harvest > max_harvest:
+        max_harvest = current_harvest
+        max_indices = (i, (i + 1) % N, (i + 2) % N)
 
-# Выводим введенные данные и максимальную урожайность
+# Выводим введенные данные и индексы тройки кустов с максимальной урожайностью
 print("Количество кустов:", N)
 print("Урожайность на каждом кусте:", harvest)
+print("Индексы тройки кустов с максимальной урожайностью:", max_indices)
 print("Максимальная урожайность за один заход собирающего модуля:", max_harvest)
+
